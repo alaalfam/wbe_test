@@ -1,7 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
 import 'package:provider/provider.dart';
-import 'package:web_test/providers/db_provider.dart';
+import 'package:web_test/db/db.dart';
 import 'package:web_test/providers/home_provider.dart';
 
 class MyHomePage extends StatelessWidget {
@@ -12,7 +12,7 @@ class MyHomePage extends StatelessWidget {
     return ChangeNotifierProvider(
       create: (_) => HomeProvider(
         context: context,
-        db: context.read<DBProvider>().db,
+        db: DB.instance,
       ),
       builder: (context, _) {
         return Scaffold(
@@ -89,6 +89,11 @@ class MyHomePage extends StatelessWidget {
                 ElevatedButton(
                   onPressed: context.watch<HomeProvider>().showPersonData,
                   child: const Text('Register a person'),
+                ),
+                const SizedBox(height: 16),
+                ElevatedButton(
+                  onPressed: context.watch<HomeProvider>().showPersonById,
+                  child: const Text('Show a person by Id'),
                 ),
               ],
             ),

@@ -32,4 +32,11 @@ class HomeProvider extends ChangeNotifier {
       context.vRouter.to(id);
     }
   }
+
+  void showPersonById() {
+    final id = idController.text;
+    if (id.isNotEmpty) {
+      context.vRouter.to('/$id');
+    }
+  }
 }

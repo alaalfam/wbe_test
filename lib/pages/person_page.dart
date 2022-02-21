@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
+import 'package:flutter/services.dart';
 import 'package:provider/provider.dart';
-import 'package:web_test/providers/db_provider.dart';
+import 'package:web_test/db/db.dart';
 import 'package:web_test/providers/person_provider.dart';
 
 class PersonPage extends StatelessWidget {
@@ -11,9 +12,10 @@ class PersonPage extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return ChangeNotifierProvider(
-      create: (context) => PersonProvider(
+      create: (_) => PersonProvider(
+        context: context,
         id: id,
-        db: context.read<DBProvider>().db,
+        db: DB.instance,
       ),
       builder: (context, _) {
         final person = context.watch<PersonProvider>().person;
@@ -30,6 +32,27 @@ class PersonPage extends StatelessWidget {
                   child: Column(
                     mainAxisAlignment: MainAxisAlignment.center,
                     children: [
+                      SizedBox(
+                        width: 200,
+                        child: TextField(
+                          decoration: const InputDecoration(
+                            label: Text('ID'),
+                            border: OutlineInputBorder(),
+                          ),
+                          inputFormatters: [
+                            FilteringTextInputFormatter.deny(' ')
+                          ],
+                          controller:
+                              context.watch<PersonProvider>().idController,
+                        ),
+                      ),
+                      const SizedBox(height: 16),
+                      ElevatedButton(
+                        onPressed:
+                            context.watch<PersonProvider>().showPersonById,
+                        child: const Text('Show a person by Id'),
+                      ),
+                      const SizedBox(height: 250),
                       Text(person.id),
                       const SizedBox(height: 16),
                       Text(person.name),

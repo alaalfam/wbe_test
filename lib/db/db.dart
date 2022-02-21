@@ -7,7 +7,6 @@ class DB {
 
   late Box<Person> personDB;
   Future<void> initialize() async {
-    await Future.delayed(const Duration(seconds: 3));
     personDB = await Hive.openBox<Person>('person');
   }
 

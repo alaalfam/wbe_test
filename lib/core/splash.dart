@@ -1,7 +1,6 @@
 import 'package:flutter/material.dart';
-import 'package:provider/provider.dart';
 import 'package:web_test/core/app.dart';
-import 'package:web_test/providers/db_provider.dart';
+import 'package:web_test/db/db.dart';
 
 class SplashScreen extends StatefulWidget {
   final String initialUrl;
@@ -16,7 +15,7 @@ class SplashScreen extends StatefulWidget {
 }
 
 class _SplashScreenState extends State<SplashScreen> {
-  final dbProvider = DBProvider();
+  final db = DB.instance;
 
   bool isInitialized = false;
 
@@ -24,21 +23,18 @@ class _SplashScreenState extends State<SplashScreen> {
   void initState() {
     super.initState();
 
-    dbProvider.initialize().then((_) {
+    db.initialize().then((_) {
       setState(() => isInitialized = true);
     });
   }
 
   @override
   Widget build(BuildContext context) {
-    return ChangeNotifierProvider.value(
-      value: dbProvider,
-      child: AnimatedSwitcher(
-        duration: const Duration(seconds: 1),
-        child: isInitialized
-            ? MyApp(initialUrl: widget.initialUrl)
-            : const Center(child: CircularProgressIndicator()),
-      ),
+    return AnimatedSwitcher(
+      duration: const Duration(seconds: 1),
+      child: isInitialized
+          ? MyApp(initialUrl: widget.initialUrl)
+          : const Center(child: CircularProgressIndicator()),
     );
   }
 }
