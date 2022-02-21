@@ -6,9 +6,8 @@ import 'package:hive_flutter/hive_flutter.dart';
 import 'package:web_test/core/splash.dart';
 import 'package:web_test/models/person.dart';
 
-Future<void> main() async {
+void main() {
   final initialUrl = window.location.pathname;
-  await Hive.initFlutter();
   Hive.registerAdapter(PersonAdapter());
   runApp(SplashScreen(initialUrl: initialUrl!));
 }
