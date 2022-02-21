@@ -3,11 +3,8 @@ import 'package:web_test/core/app.dart';
 import 'package:web_test/db/db.dart';
 
 class SplashScreen extends StatefulWidget {
-  final String initialUrl;
-
   const SplashScreen({
     Key? key,
-    required this.initialUrl,
   }) : super(key: key);
 
   @override
@@ -33,7 +30,7 @@ class _SplashScreenState extends State<SplashScreen> {
     return AnimatedSwitcher(
       duration: const Duration(seconds: 1),
       child: isInitialized
-          ? MyApp(initialUrl: widget.initialUrl)
+          ? const MyApp()
           : const Center(child: CircularProgressIndicator()),
     );
   }

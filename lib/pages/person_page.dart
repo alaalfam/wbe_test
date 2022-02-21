@@ -28,40 +28,57 @@ class PersonPage extends StatelessWidget {
               ? const Center(
                   child: Text('Loading...'),
                 )
-              : Center(
-                  child: Column(
-                    mainAxisAlignment: MainAxisAlignment.center,
-                    children: [
-                      SizedBox(
-                        width: 200,
-                        child: TextField(
-                          decoration: const InputDecoration(
-                            label: Text('ID'),
-                            border: OutlineInputBorder(),
+              : LayoutBuilder(
+                  builder: (BuildContext context, BoxConstraints constraints) {
+                    return SingleChildScrollView(
+                      physics: const AlwaysScrollableScrollPhysics(
+                        parent: BouncingScrollPhysics(),
+                      ),
+                      child: ConstrainedBox(
+                        constraints: BoxConstraints(
+                          minHeight: constraints.maxHeight,
+                          minWidth: constraints.maxWidth,
+                        ),
+                        child: Center(
+                          child: Column(
+                            mainAxisAlignment: MainAxisAlignment.center,
+                            children: [
+                              SizedBox(
+                                width: 200,
+                                child: TextField(
+                                  decoration: const InputDecoration(
+                                    label: Text('ID'),
+                                    border: OutlineInputBorder(),
+                                  ),
+                                  inputFormatters: [
+                                    FilteringTextInputFormatter.deny(' ')
+                                  ],
+                                  controller: context
+                                      .watch<PersonProvider>()
+                                      .idController,
+                                ),
+                              ),
+                              const SizedBox(height: 16),
+                              ElevatedButton(
+                                onPressed: context
+                                    .watch<PersonProvider>()
+                                    .showPersonById,
+                                child: const Text('Show a person by Id'),
+                              ),
+                              const SizedBox(height: 250),
+                              Text(person.id),
+                              const SizedBox(height: 16),
+                              Text(person.name),
+                              const SizedBox(height: 16),
+                              Text(person.emailAddress),
+                              const SizedBox(height: 16),
+                              Text(person.age.toString()),
+                            ],
                           ),
-                          inputFormatters: [
-                            FilteringTextInputFormatter.deny(' ')
-                          ],
-                          controller:
-                              context.watch<PersonProvider>().idController,
                         ),
                       ),
-                      const SizedBox(height: 16),
-                      ElevatedButton(
-                        onPressed:
-                            context.watch<PersonProvider>().showPersonById,
-                        child: const Text('Show a person by Id'),
-                      ),
-                      const SizedBox(height: 250),
-                      Text(person.id),
-                      const SizedBox(height: 16),
-                      Text(person.name),
-                      const SizedBox(height: 16),
-                      Text(person.emailAddress),
-                      const SizedBox(height: 16),
-                      Text(person.age.toString()),
-                    ],
-                  ),
+                    );
+                  },
                 ),
         );
       },

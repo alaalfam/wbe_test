@@ -19,4 +19,8 @@ class DB {
   }
 
   int get personCount => personDB.length;
+
+  void dispose() {
+    personDB.close();
+  }
 }

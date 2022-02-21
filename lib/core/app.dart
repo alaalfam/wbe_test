@@ -4,11 +4,9 @@ import 'package:web_test/pages/home_page.dart';
 import 'package:web_test/pages/person_page.dart';
 
 class MyApp extends StatelessWidget {
-  final String initialUrl;
 
   const MyApp({
     Key? key,
-    required this.initialUrl,
   }) : super(key: key);
 
   @override
@@ -16,7 +14,7 @@ class MyApp extends StatelessWidget {
     return VRouter(
       title: 'Flutter Demo',
       theme: ThemeData.light(),
-      initialUrl: initialUrl,
+      initialUrl: '/',
       mode: VRouterMode.history,
       routes: [
         VWidget(
