@@ -1,13 +1,17 @@
+import 'package:flutter/foundation.dart';
 import 'package:hive/hive.dart';
+import 'package:path_provider/path_provider.dart';
 import 'package:web_test/models/person.dart';
 
 class DB {
   static final DB instance = DB._();
   DB._();
+  static const boxName = 'person';
 
   late Box<Person> personDB;
   Future<void> initialize() async {
-    personDB = await Hive.openBox<Person>('person');
+    personDB = await openHiveBox(boxName);
+    // personDB = await Hive.openBox<Person>('person');
   }
 
   Person? getPersonById(final String id) {
@@ -22,5 +26,13 @@ class DB {
 
   void dispose() {
     personDB.close();
+  }
+
+  Future<Box<Person>> openHiveBox(String boxName) async {
+    if (!kIsWeb && !Hive.isBoxOpen(boxName)) {
+      Hive.init((await getApplicationDocumentsDirectory()).path);
+    }
+
+    return await Hive.openBox(boxName);
   }
 }
