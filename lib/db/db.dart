@@ -7,7 +7,7 @@ class DB {
   static final DB instance = DB._();
   DB._();
   static const boxName = 'person';
-
+  
   late Box<Person> personDB;
   Future<void> initialize() async {
     personDB = await openHiveBox(boxName);

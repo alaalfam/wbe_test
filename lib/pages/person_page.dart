@@ -66,13 +66,31 @@ class PersonPage extends StatelessWidget {
                                 child: const Text('Show a person by Id'),
                               ),
                               const SizedBox(height: 250),
-                              Text(person.id),
-                              const SizedBox(height: 16),
-                              Text(person.name),
-                              const SizedBox(height: 16),
-                              Text(person.emailAddress),
-                              const SizedBox(height: 16),
-                              Text(person.age.toString()),
+                              Row(
+                                children: [
+                                  Column(
+                                    children: [
+                                      Text(person.id),
+                                      const SizedBox(height: 16),
+                                      Text(person.name),
+                                      const SizedBox(height: 16),
+                                      Text(person.emailAddress),
+                                      const SizedBox(height: 16),
+                                      Text(person.age.toString()),
+                                    ],
+                                  ),
+                                  Column(
+                                    children: [
+                                      Text(person.car.id),
+                                      const SizedBox(height: 16),
+                                      Text(person.car.name),
+                                      const SizedBox(height: 16),
+                                      Text(person.car.year),
+                                      const SizedBox(height: 16),
+                                    ],
+                                  )
+                                ],
+                              ),
                             ],
                           ),
                         ),

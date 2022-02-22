@@ -6,5 +6,6 @@ import 'package:web_test/models/person.dart';
 void main() {
   Hive.initFlutter();
   Hive.registerAdapter(PersonAdapter());
+  Hive.registerAdapter(CarAdapter());
   runApp(const SplashScreen());
 }

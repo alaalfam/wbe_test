@@ -34,74 +34,131 @@ class MyHomePage extends StatelessWidget {
                   child: Center(
                     child: Column(
                       children: [
-                        SizedBox(
-                          width: 200,
-                          child: TextField(
-                            decoration: const InputDecoration(
-                              label: Text('ID'),
-                              border: OutlineInputBorder(),
+                        Row(
+                          mainAxisAlignment: MainAxisAlignment.spaceAround,
+                          children: [
+                            Column(
+                              children: [
+                                SizedBox(
+                                  width: 100,
+                                  child: TextField(
+                                    decoration: const InputDecoration(
+                                      label: Text('Person Id'),
+                                      border: OutlineInputBorder(),
+                                    ),
+                                    inputFormatters: [
+                                      FilteringTextInputFormatter.deny(' ')
+                                    ],
+                                    controller: context
+                                        .watch<HomeProvider>()
+                                        .idController,
+                                  ),
+                                ),
+                                const SizedBox(height: 16),
+                                SizedBox(
+                                  width: 100,
+                                  child: Column(
+                                    mainAxisSize: MainAxisSize.min,
+                                    children: [
+                                      TextField(
+                                        decoration: const InputDecoration(
+                                          label: Text('Full name'),
+                                          border: OutlineInputBorder(),
+                                        ),
+                                        controller: context
+                                            .watch<HomeProvider>()
+                                            .fullNameController,
+                                      ),
+                                    ],
+                                  ),
+                                ),
+                                const SizedBox(height: 16),
+                                SizedBox(
+                                  width: 100,
+                                  child: Column(
+                                    mainAxisSize: MainAxisSize.min,
+                                    children: [
+                                      TextField(
+                                        decoration: const InputDecoration(
+                                          label: Text('Email address'),
+                                          border: OutlineInputBorder(),
+                                        ),
+                                        controller: context
+                                            .watch<HomeProvider>()
+                                            .emailController,
+                                      ),
+                                    ],
+                                  ),
+                                ),
+                                const SizedBox(height: 16),
+                                SizedBox(
+                                  width: 100,
+                                  child: Column(
+                                    mainAxisSize: MainAxisSize.min,
+                                    children: [
+                                      TextField(
+                                        decoration: const InputDecoration(
+                                          label: Text('age'),
+                                          border: OutlineInputBorder(),
+                                        ),
+                                        controller: context
+                                            .watch<HomeProvider>()
+                                            .ageController,
+                                      ),
+                                    ],
+                                  ),
+                                ),
+                                const SizedBox(height: 16),
+                              ],
                             ),
-                            inputFormatters: [
-                              FilteringTextInputFormatter.deny(' ')
-                            ],
-                            controller:
-                                context.watch<HomeProvider>().idController,
-                          ),
-                        ),
-                        const SizedBox(height: 16),
-                        SizedBox(
-                          width: 200,
-                          child: Column(
-                            mainAxisSize: MainAxisSize.min,
-                            children: [
-                              TextField(
-                                decoration: const InputDecoration(
-                                  label: Text('Full name'),
-                                  border: OutlineInputBorder(),
+                            Column(
+                              children: [
+                                SizedBox(
+                                  width: 100,
+                                  child: TextField(
+                                    decoration: const InputDecoration(
+                                      label: Text('Car id'),
+                                      border: OutlineInputBorder(),
+                                    ),
+                                    inputFormatters: [
+                                      FilteringTextInputFormatter.deny(' ')
+                                    ],
+                                    controller: context
+                                        .watch<HomeProvider>()
+                                        .carIdController,
+                                  ),
                                 ),
-                                controller: context
-                                    .watch<HomeProvider>()
-                                    .fullNameController,
-                              ),
-                            ],
-                          ),
-                        ),
-                        const SizedBox(height: 16),
-                        SizedBox(
-                          width: 200,
-                          child: Column(
-                            mainAxisSize: MainAxisSize.min,
-                            children: [
-                              TextField(
-                                decoration: const InputDecoration(
-                                  label: Text('Email address'),
-                                  border: OutlineInputBorder(),
+                                const SizedBox(height: 16),
+                                SizedBox(
+                                  width: 100,
+                                  child: TextField(
+                                    decoration: const InputDecoration(
+                                      label: Text('Car name'),
+                                      border: OutlineInputBorder(),
+                                    ),
+                                    controller: context
+                                        .watch<HomeProvider>()
+                                        .carNameController,
+                                  ),
                                 ),
-                                controller: context
-                                    .watch<HomeProvider>()
-                                    .emailController,
-                              ),
-                            ],
-                          ),
-                        ),
-                        const SizedBox(height: 16),
-                        SizedBox(
-                          width: 200,
-                          child: Column(
-                            mainAxisSize: MainAxisSize.min,
-                            children: [
-                              TextField(
-                                decoration: const InputDecoration(
-                                  label: Text('age'),
-                                  border: OutlineInputBorder(),
+                                const SizedBox(height: 16),
+                                SizedBox(
+                                  width: 100,
+                                  child: TextField(
+                                    decoration: const InputDecoration(
+                                      label: Text('Car year'),
+                                      border: OutlineInputBorder(),
+                                    ),
+                                    controller: context
+                                        .watch<HomeProvider>()
+                                        .carYearController,
+                                  ),
                                 ),
-                                controller:
-                                    context.watch<HomeProvider>().ageController,
-                              ),
-                            ],
-                          ),
+                                const SizedBox(height: 16),
+                              ],
+                            )
+                          ],
                         ),
-                        const SizedBox(height: 16),
                         ElevatedButton(
                           onPressed:
                               context.watch<HomeProvider>().showPersonData,
